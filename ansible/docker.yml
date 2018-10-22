@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: ubuntu
+  become: yes
+  gather_facts: yes
+  
+  roles:
+    - geerlingguy.docker
+    - brainstorm.agha-docker
+    - brainstorm.ecs-agent
