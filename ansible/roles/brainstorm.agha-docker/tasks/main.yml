@@ -9,6 +9,7 @@
       - jq
       - parallel
       - python3-pip
+      - s3fs
 
 - name: Make sure vital python packages are installed system-wide 
   become: true
@@ -19,6 +20,14 @@
       - docker
       - boto3
       - awscli
+
+- name: Configure S3FS
+  template:
+    src=fuse.conf
+    dest=/etc/fuse.conf
+    owner=root
+    group=root
+    mode=0644
 
 - name: "Adding SSH UMCCR team public keys to the instance"
   become: false
