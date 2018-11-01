@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-temp_role=$(vault write aws/sts/ops_admin_no_mfa ttl=15m -format=json)
+temp_role=$(vault write aws/sts/ops_admin_no_mfa ttl=60m -format=json)
 
 # assume the packer_role role to get the needed AWS permissions and set the stage for the following packer build
 export AWS_REGION=ap-southeast-2

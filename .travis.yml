@@ -23,10 +23,9 @@ install:
     - mkdir /tmp/vault
     - wget -q https://releases.hashicorp.com/vault/"$VAULT_VERSION"/vault_"$VAULT_VERSION"_linux_amd64.zip && unzip -d /tmp/vault vault_"$VAULT_VERSION"_linux_amd64.zip
     - export PATH=$PATH:/tmp/vault
-    - export VAULT_ADDR=$VAULT_ADDR_DEV
-    - export VAULT_TOKEN=$VAULT_TOKEN_DEV
+    - if [ "$TRAVIS_BRANCH" = "development" ]; then export VAULT_ADDR="$VAULT_ADDR_DEV" VAULT_TOKEN="$VAULT_TOKEN_DEV"; else export VAULT_ADDR="$VAULT_ADDR_DEV" VAULT_TOKEN="$VAULT_TOKEN_DEV"; fi
     - vault --version
 script:
     - travis_wait 30 ./build.sh
 after_success:
-  - "./send-datadog-event.sh"
+  - "./send-datadog-event.sh agha-ami 'ami,agha'"
