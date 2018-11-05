@@ -2,6 +2,11 @@ language: python
 branches:
   only:
   - master
+# branches:
+#   only:
+#   # not building master, as only versioned stable builds are allowed
+#   - development
+#   - /^\d+\.\d+(\.\d+)?(-\w*)?$/ # version regex for tag commits
 env:
   global:
   - PACKER_VERSION="1.2.2"
